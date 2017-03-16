@@ -1,6 +1,9 @@
 package pl.thewalkingcode;
 
+import pl.thewalkingcode.util.CompanyMapper;
+
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.json.JsonObject;
 import javax.json.spi.JsonProvider;
 import javax.websocket.Session;
@@ -11,37 +14,33 @@ import java.util.Set;
 @ApplicationScoped
 public class ExchangeSessionHandler {
 
+    @Inject
+    private CompaniesController companiesController;
+
     private Set<Session> sessions = new HashSet<>();
 
     public void addSession(Session session) {
         sessions.add(session);
-        sendToSession(session, createJsonMessage());
+        sendToSession(session, createMessage());
     }
 
     public void removeSession(Session session) {
         sessions.remove(session);
     }
 
-    public JsonObject createJsonMessage() {
-        JsonProvider provider = JsonProvider.provider();
-        JsonObject company = provider.createObjectBuilder()
-                .add("code", "FP")
-                .add("name", "FutureProcessing")
-                .add("price", "13.0151")
-                .add("changeToUp", "false")
-                .build();
-        return company;
+    public String createMessage() {
+        return CompanyMapper.listToJson(companiesController.getCompanies());
     }
 
-    private void sendToAllConnectedSessions(JsonObject message) {
+    private void sendToAllConnectedSessions(String message) {
         for (Session session : sessions) {
             sendToSession(session, message);
         }
     }
 
-    private void sendToSession(Session session, JsonObject message) {
+    private void sendToSession(Session session, String message) {
         try {
-            session.getBasicRemote().sendText(message.toString());
+            session.getBasicRemote().sendText(message);
         } catch (IOException ioe) {
             sessions.remove(session);
         }

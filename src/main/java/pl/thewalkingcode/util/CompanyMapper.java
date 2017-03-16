@@ -1,18 +1,22 @@
 package pl.thewalkingcode.util;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import pl.thewalkingcode.model.Company;
 
-import java.util.List;
+import java.util.Date;
+import java.util.Set;
 
 public class CompanyMapper {
 
-    public static String toJson(Company company) {
-         return new Gson().toJson(company);
-    }
+    public static String listToJson(Set<Company> companyList) {
+        Gson gson = new Gson();
 
-    public static String listToJson(List<Company> companyList) {
-        return new Gson().toJson(companyList);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("companies", gson.toJsonTree(companyList));
+        jsonObject.add("time", gson.toJsonTree(new Date().toString()));
+
+        return gson.toJson(jsonObject);
     }
 
 }
