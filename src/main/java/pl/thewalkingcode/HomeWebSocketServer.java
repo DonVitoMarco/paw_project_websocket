@@ -1,6 +1,7 @@
 package pl.thewalkingcode;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
@@ -13,10 +14,17 @@ import java.util.logging.Logger;
 public class HomeWebSocketServer {
 
     private final Logger LOG = Logger.getLogger(this.getClass().getName());
+    private ExchangeSessionHandler exchangeSessionHandler;
+
+    @Inject
+    public HomeWebSocketServer(ExchangeSessionHandler exchangeSessionHandler) {
+        this.exchangeSessionHandler = exchangeSessionHandler;
+    }
 
     @OnOpen
     public void onConnectionOpen(Session session) {
         LOG.info("Connection opened : " + session.getId());
+        exchangeSessionHandler.addSession(session);
     }
 
     @OnMessage
@@ -27,6 +35,7 @@ public class HomeWebSocketServer {
     @OnClose
     public void onConnectionClose(Session session) {
         LOG.info("Connection closed : " + session.getId());
+        exchangeSessionHandler.removeSession(session);
     }
 
 }
