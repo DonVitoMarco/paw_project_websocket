@@ -4,7 +4,7 @@ public class Company {
 
     private String fullName;
     private String code;
-    private String price;
+    private double price;
     private boolean changeToUp;
 
     public Company(CompanyBuilder companyBuilder) {
@@ -30,11 +30,11 @@ public class Company {
         this.code = code;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -51,8 +51,11 @@ public class Company {
 
         private String fullName;
         private String code;
-        private String price;
+        private double price;
         private boolean changeToUp;
+
+        public CompanyBuilder() {
+        }
 
         public CompanyBuilder fullName(String fullName) {
             this.fullName = fullName;
@@ -64,7 +67,7 @@ public class Company {
             return this;
         }
 
-        public CompanyBuilder price(String price) {
+        public CompanyBuilder price(double price) {
             this.price = price;
             return this;
         }

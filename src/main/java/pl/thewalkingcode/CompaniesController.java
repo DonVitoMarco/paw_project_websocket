@@ -1,22 +1,18 @@
 package pl.thewalkingcode;
 
 import pl.thewalkingcode.model.Company;
+import pl.thewalkingcode.util.CompaniesProducer;
 
 import javax.enterprise.context.ApplicationScoped;
-import java.util.HashSet;
 import java.util.Set;
 
 @ApplicationScoped
 public class CompaniesController {
 
-    private Set<Company> companies = new HashSet<>();
+    private Set<Company> companies;
 
     public CompaniesController() {
-        Company company = new Company();
-        company.setCode("FP");
-        company.setFullName("Future Processing");
-        company.setPrice("13.001");
-        companies.add(company);
+        companies = CompaniesProducer.createCompanies();
     }
 
     public Set<Company> getCompanies() {
