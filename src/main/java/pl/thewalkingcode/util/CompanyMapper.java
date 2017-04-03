@@ -14,7 +14,7 @@ public class CompanyMapper {
 
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("companies", gson.toJsonTree(companyList));
-        jsonObject.add("time", gson.toJsonTree(new Date().toString()));
+        jsonObject.add("time", gson.toJsonTree(new Date().getTime()));
 
         return gson.toJson(jsonObject);
     }
