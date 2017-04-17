@@ -4,8 +4,6 @@ import pl.thewalkingcode.util.CompanyMapper;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.json.JsonObject;
-import javax.json.spi.JsonProvider;
 import javax.websocket.Session;
 import java.io.IOException;
 import java.util.HashSet;
