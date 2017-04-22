@@ -1,11 +1,13 @@
 package pl.thewalkingcode.model;
 
+import java.math.BigDecimal;
+
 public class Company {
 
     private String fullName;
     private String code;
-    private double price;
-    private boolean changeToUp;
+    private BigDecimal price;
+    private int changeToUp;
 
     public Company(CompanyBuilder companyBuilder) {
         this.fullName = companyBuilder.fullName;
@@ -30,19 +32,19 @@ public class Company {
         this.code = code;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public boolean isChangeToUp() {
+    public int getChangeToUp() {
         return changeToUp;
     }
 
-    public void setChangeToUp(boolean changeToUp) {
+    public void setChangeToUp(int changeToUp) {
         this.changeToUp = changeToUp;
     }
 
@@ -51,8 +53,8 @@ public class Company {
 
         private String fullName;
         private String code;
-        private double price;
-        private boolean changeToUp;
+        private BigDecimal price;
+        private int changeToUp;
 
         public CompanyBuilder() {
         }
@@ -67,12 +69,12 @@ public class Company {
             return this;
         }
 
-        public CompanyBuilder price(double price) {
+        public CompanyBuilder price(BigDecimal price) {
             this.price = price;
             return this;
         }
 
-        public CompanyBuilder changeToUp(boolean changeToUp) {
+        public CompanyBuilder changeToUp(int changeToUp) {
             this.changeToUp = changeToUp;
             return this;
         }

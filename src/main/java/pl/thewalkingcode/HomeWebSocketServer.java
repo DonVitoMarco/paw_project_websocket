@@ -1,5 +1,6 @@
 package pl.thewalkingcode;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.websocket.OnClose;
@@ -14,12 +15,10 @@ import java.util.logging.Logger;
 public class HomeWebSocketServer {
 
     private final Logger LOG = Logger.getLogger(this.getClass().getName());
-    private ExchangeSessionHandler exchangeSessionHandler;
 
     @Inject
-    public HomeWebSocketServer(ExchangeSessionHandler exchangeSessionHandler) {
-        this.exchangeSessionHandler = exchangeSessionHandler;
-    }
+    private ExchangeSessionHandler exchangeSessionHandler;
+
 
     @OnOpen
     public void onConnectionOpen(Session session) {
