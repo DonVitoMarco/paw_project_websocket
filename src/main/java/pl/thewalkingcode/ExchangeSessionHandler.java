@@ -42,7 +42,7 @@ public class ExchangeSessionHandler {
         return CompanyMapper.listToJson(companiesController.getCompanies());
     }
 
-    @Schedule(second="*/10", minute="*",hour="*", persistent=false)
+    @Schedule(second="*/30", minute="*",hour="*", persistent=false)
     public void changeRating() {
         Set<Company> companyList = companiesController.refreshCompanies();
         LOG.info(myTimerService.getCurrentTime());
